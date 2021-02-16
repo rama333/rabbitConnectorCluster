@@ -46,6 +46,22 @@ func (c *connection) Close() {
 	c.channel.Close()
 }
 
+func (c *connection) Publish(mes string) {
+	err := c.channel.Publish(
+		"",          // exchange
+		c.nameQueue, // routing key
+		false,       // mandatory
+		false,       // immediate
+		amqp.Publishing{
+			ContentType: "text/plain",
+			Body:        []byte(mes),
+		})
+
+	if err != nil {
+		logrus.Infof("failed to publish a message")
+	}
+}
+
 func (c *connection) connect() {
 
 LOOP:
@@ -108,7 +124,7 @@ func (c *connection) registerConsumer() <-chan amqp.Delivery {
 	)
 
 	if err != nil {
-		logrus.Info(err)
+		logrus.Info("Consumer ", err)
 	}
 
 	return deliveries
