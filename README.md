@@ -1,7 +1,6 @@
 # rabbitMQ CLUSTER RECONNECT
 
-_
-This project knows how to work with a rabbit cluster, and also knows how to reconnect_
+_This project knows how to work with a rabbit cluster, and also knows how to reconnect_
 
 ```
     connect := rmq.NewConnect("all-pgw-cdrs", "amqp://guest:guest@rabbit_url_node_1/", "amqp://guest:guest@rabbit_url_node_2/", "amqp://guest:guest@rabbit_url_node_2/")
@@ -19,4 +18,8 @@ This project knows how to work with a rabbit cluster, and also knows how to reco
 
 		time.Sleep(time.Second * 1)
 	})
+	
+	for i := 0; i < 100; i++ {
+		connect.Publish(fmt.Sprint(i, " - test"))
+	}
 ```
