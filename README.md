@@ -3,7 +3,7 @@
 _This project knows how to work with a rabbit cluster, and also knows how to reconnect_
 
 ```
-    connect := rmq.NewConnect("all-pgw-cdrs", "amqp://guest:guest@rabbit_url_node_1/", "amqp://guest:guest@rabbit_url_node_2/", "amqp://guest:guest@rabbit_url_node_2/")
+    connect := rmq.NewConnect("NameQueue", "amqp://guest:guest@rabbit_url_node_1/", "amqp://guest:guest@rabbit_url_node_2/", "amqp://guest:guest@rabbit_url_node_2/")
 
 	defer connect.Close()
 	logrus.SetLevel(logrus.DebugLevel)
