@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
+	_ "github.com/rama333/rabbitConnectorCluster/rmq"
 	"github.com/sirupsen/logrus"
-	"log"
 	"os"
 	"os/signal"
 	"rabbitConnectorCluster/rmq"
@@ -26,18 +26,13 @@ func main() {
 
 	connect.Consume(func(messages []byte) {
 
-		user := &user.USER{}
-
-		err := proto.Unmarshal(messages, user)
-		if err != nil {
-			log.Println("proto unmarshal", user)
-		}
+		logrus.Info(string(messages))
 
 		time.Sleep(time.Second * 1)
 	})
 
 	for i := 0; i < 100; i++ {
-		connect.Publish(fmt.Sprint(i, " - test"))
+		connect.Publish(fmt.Sprint(i, "qwe"))
 	}
 
 	signals := make(chan os.Signal)

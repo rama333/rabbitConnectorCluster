@@ -46,7 +46,7 @@ func (c *connection) Close() {
 	c.channel.Close()
 }
 
-func (c *connection) Publish(mes string) {
+func (c *connection) Publish(mes []byte) {
 	err := c.channel.Publish(
 		"",          // exchange
 		c.nameQueue, // routing key
@@ -54,7 +54,7 @@ func (c *connection) Publish(mes string) {
 		false,       // immediate
 		amqp.Publishing{
 			ContentType: "text/plain",
-			Body:        []byte(mes),
+			Body:        mes,
 		})
 
 	if err != nil {
