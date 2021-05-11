@@ -18,7 +18,7 @@ func main() {
 		logrus.Infof("stopped in %s second", time.Now().Sub(st))
 	}()
 
-	connect := rmq.NewConnect("detecteded_faces", "amqp://admin:0Ek7r85@192.168.143.86/", "amqp://guest:guest@rabbit_url_node_2/", "amqp://guest:guest@rabbit_url_node_2/")
+	connect := rmq.NewConnect("detecteded_faces", "amqp://admin:test@192.168.143.86/", "amqp://guest:guest@rabbit_url_node_2/", "amqp://guest:guest@rabbit_url_node_2/")
 
 	defer connect.Close()
 
